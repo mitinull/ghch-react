@@ -1,8 +1,7 @@
-import { isToday } from "../../utils/isToday";
-import { toDate } from "../../utils/toDate";
+import { isToday, toDate, toDayMonth } from "../../utils/date-utils";
 
 export function Meal({ meal }) {
-  const today = isToday(toDate(meal.date));
+  const today = isToday(meal.date);
 
   return (
     <div
@@ -40,7 +39,7 @@ export function Meal({ meal }) {
             </div>
           )}
         </div>
-        <div>{meal.date}</div>
+        <div>{toDayMonth(meal.date)}</div>
       </div>
       <div>
         {meal.foods.map((food) => (

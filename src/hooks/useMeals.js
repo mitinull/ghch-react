@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { toDate } from "../utils/toDate";
 import { DORM_URL, SELF_URL } from "../constants";
+import { toDate } from "../utils/date-utils";
 
 export function useMeals() {
   const selfQuery = useQuery({

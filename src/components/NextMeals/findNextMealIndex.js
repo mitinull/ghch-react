@@ -1,6 +1,5 @@
 import { DAY_IN_MS } from "../../constants";
-import { isToday } from "../../utils/isToday";
-import { toDate } from "../../utils/toDate";
+import { isToday, toDate } from "../../utils/date-utils";
 
 export function findNextMealIndex(meals) {
   const now = new Date();
@@ -12,7 +11,7 @@ export function findNextMealIndex(meals) {
 
   if (
     now.getHours() > 15 &&
-    isToday(toDate(meals[nextMealIndex].date)) &&
+    isToday(meals[nextMealIndex].date) &&
     meals[nextMealIndex].timeMeal === "ناهار"
   ) {
     nextMealIndex++;
