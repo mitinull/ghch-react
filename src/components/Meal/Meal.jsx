@@ -23,8 +23,22 @@ export function Meal({ meal }) {
           justifyContent: "space-between",
         }}
       >
-        <div>
-          {meal.timeMeal} {meal.day}
+        <div style={{ display: "flex", alignItems: "center", gap: 7 }}>
+          <div>
+            {meal.timeMeal} {meal.day}
+          </div>
+          {today && (
+            <div
+              style={{
+                fontSize: 14,
+                borderRadius: 1000,
+                padding: "4px 12px",
+                backgroundColor: "#EFE3C232",
+              }}
+            >
+              امروز
+            </div>
+          )}
         </div>
         <div>{meal.date}</div>
       </div>
