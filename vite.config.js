@@ -9,11 +9,11 @@ export default defineConfig({
     VitePWA({
       registerType: "autoUpdate", // Automatically update the service worker
       manifest: {
-        name: "Ghaza Chie? | غذا چیه",
-        short_name: "ghch | غذا چیه؟",
-        description: "مشاهده سریع وعدهٔ غذایی بعدی دانشگاه تهران.",
+        name: "غذا چیه؟ | برنامهٔ غذایی دانشگاه تهران",
+        short_name: "غذا چیه؟",
+        description: "مشاهده سریع وعدهٔ بعدی دانشگاه تهران.",
         theme_color: "#EFE3C2",
-        background_color: "#3E7B27",
+        background_color: "#bcb1b1",
         display: "standalone",
         scope: "/",
         start_url: "/",
