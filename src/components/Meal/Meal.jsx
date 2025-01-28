@@ -18,6 +18,7 @@ export function Meal({ meal }) {
           fontSize: 18,
           fontWeight: 400,
           display: "flex",
+          alignItems: "center",
           backgroundColor: "#00000040",
           justifyContent: "space-between",
         }}
@@ -39,7 +40,7 @@ export function Meal({ meal }) {
             </div>
           )}
         </div>
-        <div>{toDayMonth(meal.date)}</div>
+        <div style={{ fontSize: 16 }}>{toDayMonth(meal.date)}</div>
       </div>
       <div>
         {meal.foods.map((food) => (
