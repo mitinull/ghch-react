@@ -19,7 +19,7 @@ export default defineConfig({
         start_url: "/",
         icons: [
           {
-            src: "/ghch192.svg",
+            src: "/ghch192.png",
             sizes: "192x192",
             type: "image/png",
           },
