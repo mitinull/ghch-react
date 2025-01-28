@@ -50,6 +50,35 @@ export default defineConfig({
             options: {
               cacheName: "google-docs-cache",
               cacheableResponse: { statuses: [0, 200] },
+              plugins: [
+                {
+                  cacheDidUpdate: async ({
+                    cacheName,
+                    request,
+                    oldResponse,
+                    newResponse,
+                  }) => {
+                    if (!newResponse || !request) return;
+
+                    const updatedData = await newResponse.json();
+
+                    const message = {
+                      type: "CACHE_UPDATED",
+                      payload: {
+                        cacheName,
+                        url: request.url,
+                        data: updatedData,
+                      },
+                    };
+
+                    // Broadcast a message to the app
+                    const clients = await self.clients.matchAll();
+                    clients.forEach((client) => {
+                      client.postMessage(message);
+                    });
+                  },
+                },
+              ],
             },
           },
           {

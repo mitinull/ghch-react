@@ -1,4 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import "./App.css";
 import { MealList } from "./components/MealList/MealList";
 import { NextMeals } from "./components/NextMeals/NextMeals";
@@ -17,6 +18,7 @@ function App() {
       {tab === NEXT_MEALS_TAB && <NextMeals />}
       {tab === MEAL_LIST_TAB && <MealList />}
       <div style={{ marginBottom: 15 }}></div>
+      <ReactQueryDevtools />
     </QueryClientProvider>
   );
 }

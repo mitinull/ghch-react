@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@tanstack/react-query": "^5.63.0",
+    "@tanstack/react-query-devtools": "^5.65.1",
     "jalaali-js": "^1.2.7",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"

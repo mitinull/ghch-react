@@ -1,6 +1,7 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { DORM_URL, SELF_URL } from "../constants";
 import { toDate } from "../utils/date-utils";
+import { useEffect } from "react";
 
 export function useMeals() {
   const selfQuery = useQuery({
@@ -12,6 +13,30 @@ export function useMeals() {
     queryKey: ["dorm"],
     queryFn: () => fetch(DORM_URL).then((res) => res.json()),
   });
+
+  const queryClient = useQueryClient();
+
+  useEffect(() => {
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.addEventListener("message", (event) => {
+        if (
+          event.data &&
+          event.data.type === "CACHE_UPDATED" &&
+          event.data.payload.cacheName === "google-docs-cache"
+        ) {
+          const { url, data } = event.data.payload;
+          if (url === SELF_URL) {
+            queryClient.setQueriesData({ queryKey: ["self"] }, data);
+            console.log("self updated");
+          }
+          if (url === DORM_URL) {
+            queryClient.setQueriesData({ queryKey: ["dorm"] }, data);
+            console.log("dorm updated");
+          }
+        }
+      });
+    }
+  }, [queryClient]);
 
   if (selfQuery.isPending || dormQuery.isPending) return { isPending: true };
 

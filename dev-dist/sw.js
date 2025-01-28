@@ -67,7 +67,7 @@ if (!self.define) {
     });
   };
 }
-define(['./workbox-985f11f4'], (function (workbox) { 'use strict';
+define(['./workbox-01159c00'], (function (workbox) { 'use strict';
 
   self.skipWaiting();
   workbox.clientsClaim();
@@ -82,7 +82,7 @@ define(['./workbox-985f11f4'], (function (workbox) { 'use strict';
     "revision": "3ca0b8505b4bec776b69afdba2768812"
   }, {
     "url": "index.html",
-    "revision": "0.5nahautjisg"
+    "revision": "0.hore5uuvkfg"
   }], {});
   workbox.cleanupOutdatedCaches();
   workbox.registerRoute(new workbox.NavigationRoute(workbox.createHandlerBoundToURL("index.html"), {
@@ -98,8 +98,38 @@ define(['./workbox-985f11f4'], (function (workbox) { 'use strict';
   }), 'GET');
   workbox.registerRoute(({
     url
-  }) => url.href.startsWith("https://docs.google.com/document/d/"), new workbox.CacheFirst({
+  }) => url.href.startsWith("https://docs.google.com/document/d/"), new workbox.StaleWhileRevalidate({
     "cacheName": "google-docs-cache",
+    plugins: [new workbox.CacheableResponsePlugin({
+      statuses: [0, 200]
+    }), {
+      cacheDidUpdate: async ({
+        cacheName,
+        request,
+        oldResponse,
+        newResponse
+      }) => {
+        if (!newResponse || !request) return;
+        const updatedData = await newResponse.json();
+        const message = {
+          type: "CACHE_UPDATED",
+          payload: {
+            cacheName,
+            url: request.url,
+            data: updatedData
+          }
+        };
+        const clients = await self.clients.matchAll();
+        clients.forEach(client => {
+          client.postMessage(message);
+        });
+      }
+    }]
+  }), 'GET');
+  workbox.registerRoute(({
+    url
+  }) => url.pathname.startsWith("/favicon"), new workbox.CacheFirst({
+    "cacheName": "favicon-cache",
     plugins: [new workbox.CacheableResponsePlugin({
       statuses: [0, 200]
     })]
