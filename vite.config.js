@@ -33,6 +33,35 @@ export default defineConfig({
       devOptions: {
         enabled: true, // Enable PWA support during development for testing
       },
+      workbox: {
+        runtimeCaching: [
+          {
+            urlPattern: ({ url }) => url.pathname.startsWith("/assets"),
+            handler: "CacheFirst",
+            options: {
+              cacheName: "assets-cache",
+              cacheableResponse: { statuses: [0, 200] },
+            },
+          },
+          {
+            urlPattern: ({ url }) =>
+              url.href.startsWith("https://docs.google.com/document/d/"),
+            handler: "CacheFirst",
+            options: {
+              cacheName: "google-docs-cache",
+              cacheableResponse: { statuses: [0, 200] },
+            },
+          },
+          {
+            urlPattern: ({ url }) => url.pathname.startsWith("/favicon"),
+            handler: "CacheFirst",
+            options: {
+              cacheName: "favicon-cache",
+              cacheableResponse: { statuses: [0, 200] },
+            },
+          },
+        ],
+      },
     }),
   ],
 });
