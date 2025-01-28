@@ -50,7 +50,10 @@ export function Meal({ meal }) {
             <div
               key={food}
               style={{
+                gap: 4,
                 padding: 20,
+                display: "flex",
+                flexDirection: "column",
                 borderTop: "1px solid #EFE3C280",
               }}
             >
@@ -62,7 +65,14 @@ export function Meal({ meal }) {
               >
                 {foodTitle}
               </div>
-              <div style={{ fontSize: 16, fontWeight: 400, opacity: 0.75 }}>
+              <div
+                style={{
+                  fontSize: 16,
+                  fontWeight: 400,
+                  opacity: 0.75,
+                  lineHeight: 1.5,
+                }}
+              >
                 {foodDetail}
               </div>
             </div>
