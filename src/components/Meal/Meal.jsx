@@ -3,13 +3,14 @@ import { parseFood } from "../../utils/string-utils";
 
 export function Meal({ meal }) {
   const today = isToday(meal.date);
+  const lunch = meal.timeMeal === "ناهار";
 
   return (
     <div
       style={{
         color: "white",
         borderRadius: 5,
-        backgroundColor: "#3E7B27",
+        backgroundColor: lunch ? "#3E7B27" : "#123524",
         overflow: "hidden",
       }}
     >
@@ -37,7 +38,7 @@ export function Meal({ meal }) {
                 backgroundColor: "#EFE3C232",
               }}
             >
-              امروز
+              {lunch ? "امروز" : "امشب"}
             </div>
           )}
         </div>
