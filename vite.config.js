@@ -46,7 +46,7 @@ export default defineConfig({
           {
             urlPattern: ({ url }) =>
               url.href.startsWith("https://docs.google.com/document/d/"),
-            handler: "CacheFirst",
+            handler: "StaleWhileRevalidate",
             options: {
               cacheName: "google-docs-cache",
               cacheableResponse: { statuses: [0, 200] },
