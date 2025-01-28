@@ -1,8 +1,9 @@
-import { isToday, toDate, toDayMonth } from "../../utils/date-utils";
+import { isToday, isTomorrow, toDayMonth } from "../../utils/date-utils";
 import { parseFood } from "../../utils/string-utils";
 
 export function Meal({ meal }) {
   const isMealToday = isToday(meal.date);
+  const isMealTomorrow = isTomorrow(meal.date);
   const isLunchTime = meal.timeMeal === "ناهار";
 
   return (
@@ -30,7 +31,7 @@ export function Meal({ meal }) {
           <div>
             {meal.timeMeal} {meal.day}
           </div>
-          {isMealToday && (
+          {(isMealToday || isMealTomorrow) && (
             <div
               style={{
                 fontSize: 14,
@@ -39,7 +40,13 @@ export function Meal({ meal }) {
                 backgroundColor: "#EFE3C232",
               }}
             >
-              {isLunchTime ? "امروز" : "امشب"}
+              {isLunchTime
+                ? isMealToday
+                  ? "امروز"
+                  : "فردا"
+                : isMealToday
+                ? "امشب"
+                : "فرداشب"}
             </div>
           )}
         </div>
