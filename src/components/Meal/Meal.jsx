@@ -1,4 +1,5 @@
 import { isToday, toDate, toDayMonth } from "../../utils/date-utils";
+import { parseFood } from "../../utils/string-utils";
 
 export function Meal({ meal }) {
   const today = isToday(meal.date);
@@ -43,14 +44,30 @@ export function Meal({ meal }) {
         <div style={{ fontSize: 16 }}>{toDayMonth(meal.date)}</div>
       </div>
       <div>
-        {meal.foods.map((food) => (
-          <div
-            key={food}
-            style={{ padding: 20, borderTop: "1px solid #EFE3C280" }}
-          >
-            {food}
-          </div>
-        ))}
+        {meal.foods.map((food) => {
+          const { foodTitle, foodDetail } = parseFood(food);
+          return (
+            <div
+              key={food}
+              style={{
+                padding: 20,
+                borderTop: "1px solid #EFE3C280",
+              }}
+            >
+              <div
+                style={{
+                  fontSize: 20,
+                  fontWeight: 600,
+                }}
+              >
+                {foodTitle}
+              </div>
+              <div style={{ fontSize: 16, fontWeight: 400, opacity: 0.75 }}>
+                {foodDetail}
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
