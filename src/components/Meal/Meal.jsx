@@ -10,7 +10,7 @@ export function Meal({ meal }) {
         color: "white",
         borderRadius: 5,
         backgroundColor: "#3E7B27",
-        fontWeight: today ? undefined : undefined,
+        overflow: "hidden",
       }}
     >
       <div
