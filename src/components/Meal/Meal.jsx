@@ -2,23 +2,40 @@ import { isToday } from "../../utils/isToday";
 import { toDate } from "../../utils/toDate";
 
 export function Meal({ meal }) {
-  const active = isToday(toDate(meal.date));
+  const today = isToday(toDate(meal.date));
 
   return (
     <div
       style={{
-        fontWeight: active ? 800 : undefined,
-        border: "1px solid",
-        padding: 10,
-        margin: 10,
+        color: "white",
+        borderRadius: 5,
+        backgroundColor: "#3E7B27",
+        fontWeight: today ? undefined : undefined,
       }}
     >
-      <div>
-        {meal.timeMeal} {meal.day} {meal.date}
+      <div
+        style={{
+          padding: 20,
+          fontSize: 18,
+          fontWeight: 400,
+          display: "flex",
+          backgroundColor: "#00000040",
+          justifyContent: "space-between",
+        }}
+      >
+        <div>
+          {meal.timeMeal} {meal.day}
+        </div>
+        <div>{meal.date}</div>
       </div>
       <div>
         {meal.foods.map((food) => (
-          <div key={food}>{food}</div>
+          <div
+            key={food}
+            style={{ padding: 20, borderTop: "1px solid #EFE3C280" }}
+          >
+            {food}
+          </div>
         ))}
       </div>
     </div>

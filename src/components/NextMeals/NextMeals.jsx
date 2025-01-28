@@ -20,7 +20,15 @@ export function NextMeals() {
   }
 
   return (
-    <div>
+    <div
+      style={{
+        gap: 12,
+        display: "flex",
+        paddingLeft: 10,
+        paddingRight: 10,
+        flexDirection: "column",
+      }}
+    >
       <Meal meal={meals[nextMealIndex]} />
       <Meal meal={meals[nextMealIndex + 1]} />
     </div>
