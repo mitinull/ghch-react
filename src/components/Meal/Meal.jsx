@@ -12,6 +12,7 @@ export function Meal({ meal }) {
         borderRadius: 5,
         backgroundColor: isLunchTime ? "#3E7B27" : "#123524",
         overflow: "hidden",
+        paddingBottom: 1,
       }}
     >
       <div
@@ -51,17 +52,16 @@ export function Meal({ meal }) {
             <div
               key={food}
               style={{
-                gap: 4,
                 padding: 20,
-                display: "flex",
-                flexDirection: "column",
                 borderTop: "1px solid #EFE3C280",
+                lineHeight: 1.9,
               }}
             >
               <div
                 style={{
                   fontSize: 20,
                   fontWeight: 600,
+                  marginBottom: 1,
                 }}
               >
                 {foodTitle}
