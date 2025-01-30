@@ -4,7 +4,7 @@ import ThreeLayersIcon from "../../assets/three-layers.svg";
 import { MEAL_LIST_TAB, NEXT_MEALS_TAB } from "../../constants";
 import { useTab } from "../../contexts/TabContext";
 
-export function Header() {
+export function Header({ openSidebar }) {
   const { tab, setTab } = useTab();
 
   return (
@@ -39,7 +39,12 @@ export function Header() {
       >
         {tab === NEXT_MEALS_TAB ? "غذا چیه؟" : "برنامهٔ غذایی"}
       </h1>
-      <img src={MenuIcon} alt="menu" />
+      <img
+        src={MenuIcon}
+        alt="menu"
+        style={{ cursor: "pointer" }}
+        onClick={openSidebar}
+      />
     </div>
   );
 }
