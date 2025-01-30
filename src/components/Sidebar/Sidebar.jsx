@@ -17,7 +17,9 @@ export function Sidebar() {
         textAlign: "left",
       }}
     >
-      <SidebarItem icon={ExternalLinkIcon}>برو به سایت رزرو غذا</SidebarItem>
+      <a href="http://dining2.ut.ac.ir/" target="_blank">
+        <SidebarItem icon={ExternalLinkIcon}>برو به سایت رزرو غذا</SidebarItem>
+      </a>
       <SidebarItem icon={UserIcon}>دربارهٔ ما</SidebarItem>
       <SidebarItem icon={DollarIcon}>حمایت مالی</SidebarItem>
     </div>
@@ -26,9 +28,12 @@ export function Sidebar() {
 
 function SidebarItem({ icon, children }) {
   return (
-    <div style={{ display: "flex", padding: 20, gap: 25 }} dir="ltr">
+    <div
+      style={{ display: "flex", padding: 20, gap: 25, cursor: "pointer" }}
+      dir="ltr"
+    >
       <img src={icon} alt={children} />
-      <div style={{ fontSize: 14, fontWeight: 500 }}>{children}</div>
+      <div style={{ fontSize: 14, fontWeight: 600 }}>{children}</div>
     </div>
   );
 }
