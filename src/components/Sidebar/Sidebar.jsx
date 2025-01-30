@@ -21,7 +21,9 @@ export function Sidebar() {
         <SidebarItem icon={ExternalLinkIcon}>برو به سایت رزرو غذا</SidebarItem>
       </a>
       <SidebarItem icon={UserIcon}>دربارهٔ ما</SidebarItem>
-      <SidebarItem icon={DollarIcon}>حمایت مالی</SidebarItem>
+      <a href="https://reymit.ir/ghaza" target="_blank">
+        <SidebarItem icon={DollarIcon}>حمایت مالی</SidebarItem>
+      </a>
     </div>
   );
 }
