@@ -27,11 +27,9 @@ export function useMeals() {
           const { url, data } = event.data.payload;
           if (url === SELF_URL) {
             queryClient.setQueriesData({ queryKey: ["self"] }, data);
-            console.log("self updated");
           }
           if (url === DORM_URL) {
             queryClient.setQueriesData({ queryKey: ["dorm"] }, data);
-            console.log("dorm updated");
           }
         }
       });

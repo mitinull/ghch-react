@@ -11,12 +11,26 @@ export function NextMeals() {
 
   const nextMealIndex = findNextMealIndex(meals);
 
-  if (nextMealIndex === -1 || !meals[nextMealIndex]) {
-    return <div>وعدهٔ بعدی یافت نشد!</div>;
-  }
+  const hasSecondMeal = !!meals[nextMealIndex + 1];
 
-  if (!meals[nextMealIndex + 1]) {
-    return <div>وعده‌های بعدی یافت نشدند!</div>;
+  if (nextMealIndex === -1 || !meals[nextMealIndex]) {
+    return (
+      <div style={{ padding: "0 12px" }}>
+        <div
+          style={{
+            fontSize: 20,
+            color: "white",
+            borderRadius: 5,
+            fontWeight: 600,
+            textAlign: "center",
+            padding: "40px 30px",
+            backgroundColor: "#123524",
+          }}
+        >
+          وعدهٔ بعدی یافت نشد!
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -30,7 +44,7 @@ export function NextMeals() {
       }}
     >
       <Meal meal={meals[nextMealIndex]} />
-      <Meal meal={meals[nextMealIndex + 1]} />
+      {hasSecondMeal && <Meal meal={meals[nextMealIndex + 1]} />}
     </div>
   );
 }
