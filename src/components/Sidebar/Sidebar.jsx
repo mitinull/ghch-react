@@ -14,12 +14,12 @@ import { useSidebar } from "../../contexts/SidebarContext";
 
 export function Sidebar() {
   const { setTab } = useTab();
-  const { sidebarIsOpen, closeSidebar } = useSidebar();
+  const { sidebarIsOpen, setSidebarIsOpen, closeSidebar } = useSidebar();
 
   const handleItemClick = (tab, func) => () => {
-    history.pushState(tab, "");
+    setSidebarIsOpen(false);
     func();
-    closeSidebar();
+    window.history.replaceState({ tab, sidebarIsOpen: false }, "");
   };
 
   return (

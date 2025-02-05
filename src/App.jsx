@@ -14,23 +14,24 @@ import { Sidebar } from "./components/Sidebar/Sidebar";
 import { InstallTutorial } from "./components/InstallTutorial/InstallTutorial";
 import { AboutUs } from "./components/AboutUs/AboutUs";
 import { useEffect } from "react";
+import { useSidebar } from "./contexts/SidebarContext";
 
 const queryClient = new QueryClient();
 
 function App() {
   const { tab, setTab } = useTab();
+  const { setSidebarIsOpen } = useSidebar();
+
+  const setStatesFromHistory = () => {
+    setTab(window.history.state?.tab || NEXT_MEALS_TAB);
+    setSidebarIsOpen(window.history.state?.sidebarIsOpen);
+  };
+
+  useEffect(setStatesFromHistory, []);
 
   useEffect(() => {
-    setTab(window.history.state || NEXT_MEALS_TAB);
-  }, []);
-
-  useEffect(() => {
-    const handleBackButton = () => {
-      setTab(window.history.state || NEXT_MEALS_TAB);
-    };
-
-    window.addEventListener("popstate", handleBackButton);
-    return () => window.removeEventListener("popstate", handleBackButton);
+    window.addEventListener("popstate", setStatesFromHistory);
+    return () => window.removeEventListener("popstate", setStatesFromHistory);
   }, []);
 
   return (
