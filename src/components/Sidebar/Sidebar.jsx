@@ -1,8 +1,27 @@
 import ExternalLinkIcon from "../../assets/external-link.svg";
 import UserIcon from "../../assets/user.svg";
 import DollarIcon from "../../assets/dollar.svg";
+import { useEffect } from "react";
 
 export function Sidebar({ isOpen, closeSidebar }) {
+  useEffect(() => {
+    const handleBackButton = (e) => {
+      closeSidebar();
+    };
+
+    window.addEventListener("popstate", handleBackButton);
+    return () => window.removeEventListener("popstate", handleBackButton);
+  }, []);
+
+  useEffect(() => {
+    if (isOpen) {
+      if (window.history.state !== "sidebar")
+        window.history.pushState("sidebar", "");
+    } else {
+      if (window.history.state === "sidebar") window.history.back();
+    }
+  }, [isOpen]);
+
   return (
     <div>
       <div
