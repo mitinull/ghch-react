@@ -21,8 +21,12 @@ function App() {
   const { tab, setTab } = useTab();
 
   useEffect(() => {
+    setTab(window.history.state || NEXT_MEALS_TAB);
+  }, []);
+
+  useEffect(() => {
     const handleBackButton = () => {
-      setTab(NEXT_MEALS_TAB);
+      setTab(window.history.state || NEXT_MEALS_TAB);
     };
 
     window.addEventListener("popstate", handleBackButton);

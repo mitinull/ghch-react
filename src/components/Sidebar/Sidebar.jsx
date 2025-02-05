@@ -16,8 +16,8 @@ export function Sidebar() {
   const { setTab } = useTab();
   const { sidebarIsOpen, closeSidebar } = useSidebar();
 
-  const handleClick = (func) => () => {
-    history.pushState(null, "");
+  const handleItemClick = (tab, func) => () => {
+    history.pushState(tab, "");
     func();
     closeSidebar();
   };
@@ -80,19 +80,23 @@ export function Sidebar() {
         <div style={{ padding: "15px 0" }}>
           <SidebarItem
             icon={CalendarIcon}
-            onClick={handleClick(() => setTab(MEAL_LIST_TAB))}
+            onClick={handleItemClick(MEAL_LIST_TAB, () =>
+              setTab(MEAL_LIST_TAB)
+            )}
           >
             برنامهٔ غذایی
           </SidebarItem>
           <SidebarItem
             icon={BoxIcon}
-            onClick={handleClick(() => setTab(INSTALL_TUTORIAL_TAB))}
+            onClick={handleItemClick(INSTALL_TUTORIAL_TAB, () =>
+              setTab(INSTALL_TUTORIAL_TAB)
+            )}
           >
             آموزش نصب
           </SidebarItem>
           <SidebarItem
             icon={UserIcon}
-            onClick={handleClick(() => setTab(ABOUT_US_TAB))}
+            onClick={handleItemClick(ABOUT_US_TAB, () => setTab(ABOUT_US_TAB))}
           >
             دربارهٔ ما
           </SidebarItem>

@@ -42,7 +42,10 @@ export function Header({ title, hasMenu }) {
           src={LeftArrowIcon}
           alt="back"
           style={{ cursor: "pointer", position: "absolute", left: 25 }}
-          onClick={() => setTab(NEXT_MEALS_TAB)}
+          onClick={() => {
+            window.history.back();
+            setTab(window.history.state || NEXT_MEALS_TAB);
+          }}
         />
       )}
     </div>
