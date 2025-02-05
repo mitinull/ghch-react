@@ -74,17 +74,12 @@ export function Sidebar() {
         <div style={{ padding: "15px 0" }}>
           <SidebarItem
             icon={CalendarIcon}
-            active={tab === MEAL_LIST_TAB}
             onClick={handleClick(() => setTab(MEAL_LIST_TAB))}
           >
             برنامهٔ غذایی
           </SidebarItem>
-          <SidebarItem icon={BoxIcon} active={false}>
-            آموزش نصب
-          </SidebarItem>
-          <SidebarItem icon={UserIcon} active={false}>
-            دربارهٔ ما
-          </SidebarItem>
+          <SidebarItem icon={BoxIcon}>آموزش نصب</SidebarItem>
+          <SidebarItem icon={UserIcon}>دربارهٔ ما</SidebarItem>
           <hr
             style={{
               height: 1,
@@ -108,7 +103,7 @@ export function Sidebar() {
   );
 }
 
-function SidebarItem({ icon, children, active, ...other }) {
+function SidebarItem({ icon, children, ...other }) {
   return (
     <div
       style={{
@@ -117,7 +112,6 @@ function SidebarItem({ icon, children, active, ...other }) {
         display: "flex",
         cursor: "pointer",
         alignItems: "center",
-        backgroundColor: active ? "#3E7B2744" : undefined,
       }}
       {...other}
     >
