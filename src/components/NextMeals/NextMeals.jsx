@@ -15,7 +15,7 @@ export function NextMeals() {
 
   if (nextMealIndex === -1 || !meals[nextMealIndex]) {
     return (
-      <div style={{ padding: "0 12px" }}>
+      <div style={{ padding: "0 12px" }} className="page-enter">
         <div
           style={{
             fontSize: 20,
@@ -42,6 +42,7 @@ export function NextMeals() {
         paddingRight: 10,
         flexDirection: "column",
       }}
+      className="page-enter"
     >
       <Meal meal={meals[nextMealIndex]} />
       {hasSecondMeal && <Meal meal={meals[nextMealIndex + 1]} />}

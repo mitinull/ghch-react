@@ -17,6 +17,7 @@ export function MealList() {
         paddingRight: 10,
         flexDirection: "column",
       }}
+      className="page-enter"
     >
       {meals.map((meal) => (
         <Meal key={meal.date + meal.timeMeal} meal={meal} />
