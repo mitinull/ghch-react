@@ -4,7 +4,12 @@ import UserIcon from "../../assets/user.svg";
 import DollarIcon from "../../assets/dollar.svg";
 import ExternalLinkIcon from "../../assets/external-link.svg";
 import { useTab } from "../../contexts/TabContext";
-import { MEAL_LIST_TAB, NEXT_MEALS_TAB } from "../../constants";
+import {
+  ABOUT_US_TAB,
+  INSTALL_TUTORIAL_TAB,
+  MEAL_LIST_TAB,
+  NEXT_MEALS_TAB,
+} from "../../constants";
 import { useSidebar } from "../../contexts/SidebarContext";
 
 export function Sidebar() {
@@ -78,8 +83,18 @@ export function Sidebar() {
           >
             برنامهٔ غذایی
           </SidebarItem>
-          <SidebarItem icon={BoxIcon}>آموزش نصب</SidebarItem>
-          <SidebarItem icon={UserIcon}>دربارهٔ ما</SidebarItem>
+          <SidebarItem
+            icon={BoxIcon}
+            onClick={handleClick(() => setTab(INSTALL_TUTORIAL_TAB))}
+          >
+            آموزش نصب
+          </SidebarItem>
+          <SidebarItem
+            icon={UserIcon}
+            onClick={handleClick(() => setTab(ABOUT_US_TAB))}
+          >
+            دربارهٔ ما
+          </SidebarItem>
           <hr
             style={{
               height: 1,

@@ -1,4 +1,5 @@
 import { useMeals } from "../../hooks/useMeals";
+import { Header } from "../Header/Header";
 import { Meal } from "../Meal/Meal";
 import { findNextMealIndex } from "./findNextMealIndex";
 
@@ -34,18 +35,21 @@ export function NextMeals() {
   }
 
   return (
-    <div
-      style={{
-        gap: 12,
-        display: "flex",
-        paddingLeft: 10,
-        paddingRight: 10,
-        flexDirection: "column",
-      }}
-      className="page-enter"
-    >
-      <Meal meal={meals[nextMealIndex]} />
-      {hasSecondMeal && <Meal meal={meals[nextMealIndex + 1]} />}
+    <div>
+      <Header title="غذا چیه؟" hasMenu />
+      <div
+        style={{
+          gap: 12,
+          display: "flex",
+          paddingLeft: 10,
+          paddingRight: 10,
+          flexDirection: "column",
+        }}
+        className="page-enter"
+      >
+        <Meal meal={meals[nextMealIndex]} />
+        {hasSecondMeal && <Meal meal={meals[nextMealIndex + 1]} />}
+      </div>
     </div>
   );
 }

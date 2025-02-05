@@ -4,20 +4,20 @@ import { MEAL_LIST_TAB, NEXT_MEALS_TAB } from "../../constants";
 import { useTab } from "../../contexts/TabContext";
 import { useSidebar } from "../../contexts/SidebarContext";
 
-export function Header() {
+export function Header({ title, hasMenu }) {
   const { tab, setTab } = useTab();
   const { openSidebar } = useSidebar();
 
   return (
     <div
       style={{
+        top: 0,
         padding: 25,
+        zIndex: 1000,
         display: "flex",
         alignItems: "center",
         position: "sticky",
         backgroundColor: "#efe3c2",
-        zIndex: 1000,
-        top: 0,
       }}
     >
       <h1
@@ -28,9 +28,9 @@ export function Header() {
           flex: 1,
         }}
       >
-        {tab === NEXT_MEALS_TAB ? "غذا چیه؟" : "برنامهٔ غذایی"}
+        {title}
       </h1>
-      {tab === NEXT_MEALS_TAB ? (
+      {hasMenu ? (
         <img
           src={MenuIcon}
           alt="menu"
