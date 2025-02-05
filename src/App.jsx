@@ -3,7 +3,6 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import "./App.css";
 import { MealList } from "./components/MealList/MealList";
 import { NextMeals } from "./components/NextMeals/NextMeals";
-import { Header } from "./components/Header/Header";
 import { useTab } from "./contexts/TabContext";
 import {
   ABOUT_US_TAB,
@@ -14,11 +13,21 @@ import {
 import { Sidebar } from "./components/Sidebar/Sidebar";
 import { InstallTutorial } from "./components/InstallTutorial/InstallTutorial";
 import { AboutUs } from "./components/AboutUs/AboutUs";
+import { useEffect } from "react";
 
 const queryClient = new QueryClient();
 
 function App() {
-  const { tab } = useTab();
+  const { tab, setTab } = useTab();
+
+  useEffect(() => {
+    const handleBackButton = () => {
+      setTab(NEXT_MEALS_TAB);
+    };
+
+    window.addEventListener("popstate", handleBackButton);
+    return () => window.removeEventListener("popstate", handleBackButton);
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>

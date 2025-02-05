@@ -13,10 +13,11 @@ import {
 import { useSidebar } from "../../contexts/SidebarContext";
 
 export function Sidebar() {
-  const { tab, setTab } = useTab();
+  const { setTab } = useTab();
   const { sidebarIsOpen, closeSidebar } = useSidebar();
 
   const handleClick = (func) => () => {
+    history.pushState(null, "");
     func();
     closeSidebar();
   };
