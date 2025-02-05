@@ -1,26 +1,20 @@
-import ExternalLinkIcon from "../../assets/external-link.svg";
+import CalendarIcon from "../../assets/calendar.svg";
+import BoxIcon from "../../assets/box.svg";
 import UserIcon from "../../assets/user.svg";
 import DollarIcon from "../../assets/dollar.svg";
-import { useEffect } from "react";
+import ExternalLinkIcon from "../../assets/external-link.svg";
+import { useTab } from "../../contexts/TabContext";
+import { MEAL_LIST_TAB, NEXT_MEALS_TAB } from "../../constants";
+import { useSidebar } from "../../contexts/SidebarContext";
 
-export function Sidebar({ isOpen, closeSidebar }) {
-  useEffect(() => {
-    const handleBackButton = (e) => {
-      closeSidebar();
-    };
+export function Sidebar() {
+  const { tab, setTab } = useTab();
+  const { sidebarIsOpen, closeSidebar } = useSidebar();
 
-    window.addEventListener("popstate", handleBackButton);
-    return () => window.removeEventListener("popstate", handleBackButton);
-  }, []);
-
-  useEffect(() => {
-    if (isOpen) {
-      if (window.history.state !== "sidebar")
-        window.history.pushState("sidebar", "");
-    } else {
-      if (window.history.state === "sidebar") window.history.back();
-    }
-  }, [isOpen]);
+  const handleClick = (func) => () => {
+    func();
+    closeSidebar();
+  };
 
   return (
     <div>
@@ -32,8 +26,8 @@ export function Sidebar({ isOpen, closeSidebar }) {
           backgroundColor: "#0004",
           width: "100vw",
           height: "100vh",
-          pointerEvents: isOpen ? undefined : "none",
-          opacity: isOpen ? undefined : 0,
+          pointerEvents: sidebarIsOpen ? undefined : "none",
+          opacity: sidebarIsOpen ? undefined : 0,
           transition: ".3s ease-out",
         }}
         onClick={closeSidebar}
@@ -47,9 +41,9 @@ export function Sidebar({ isOpen, closeSidebar }) {
           width: "80vw",
           maxWidth: 500,
           height: "100vh",
-          boxShadow: isOpen ? "2px 0px 8px #0004" : undefined,
+          boxShadow: sidebarIsOpen ? "2px 0px 8px #0004" : undefined,
           textAlign: "left",
-          translate: isOpen ? undefined : "-100%",
+          translate: sidebarIsOpen ? undefined : "-100%",
           transition: ".3s ease-out",
         }}
         dir="ltr"
@@ -76,12 +70,33 @@ export function Sidebar({ isOpen, closeSidebar }) {
           </div>
         </div>
         <div style={{ padding: "15px 0" }}>
+          <SidebarItem
+            icon={CalendarIcon}
+            active={tab === MEAL_LIST_TAB}
+            onClick={handleClick(() => setTab(MEAL_LIST_TAB))}
+          >
+            برنامهٔ غذایی
+          </SidebarItem>
+          <SidebarItem icon={BoxIcon} active={false}>
+            آموزش نصب
+          </SidebarItem>
+          <SidebarItem icon={UserIcon} active={false}>
+            دربارهٔ ما
+          </SidebarItem>
+          <hr
+            style={{
+              height: 1,
+              fill: "black",
+              border: "none",
+              backgroundColor: "#0004",
+              margin: "15px 0",
+            }}
+          />
           <a href="http://dining2.ut.ac.ir/" target="_blank">
             <SidebarItem icon={ExternalLinkIcon}>
               برو به سایت رزرو غذا
             </SidebarItem>
           </a>
-          <SidebarItem icon={UserIcon}>دربارهٔ ما</SidebarItem>
           <a href="https://reymit.ir/ghaza" target="_blank">
             <SidebarItem icon={DollarIcon}>حمایت مالی</SidebarItem>
           </a>
@@ -91,7 +106,7 @@ export function Sidebar({ isOpen, closeSidebar }) {
   );
 }
 
-function SidebarItem({ icon, children }) {
+function SidebarItem({ icon, children, active, ...other }) {
   return (
     <div
       style={{
@@ -100,7 +115,9 @@ function SidebarItem({ icon, children }) {
         display: "flex",
         cursor: "pointer",
         alignItems: "center",
+        backgroundColor: active ? "#3E7B2744" : undefined,
       }}
+      {...other}
     >
       <img src={icon} alt={children} />
       <div style={{ fontSize: 14, fontWeight: 600 }}>{children}</div>

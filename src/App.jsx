@@ -7,24 +7,19 @@ import { Header } from "./components/Header/Header";
 import { useTab } from "./contexts/TabContext";
 import { MEAL_LIST_TAB, NEXT_MEALS_TAB } from "./constants";
 import { Sidebar } from "./components/Sidebar/Sidebar";
-import { useState } from "react";
 
 const queryClient = new QueryClient();
 
 function App() {
   const { tab } = useTab();
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Header openSidebar={() => setIsSidebarOpen(true)} />
+      <Header />
       {tab === NEXT_MEALS_TAB && <NextMeals />}
       {tab === MEAL_LIST_TAB && <MealList />}
       <div style={{ marginBottom: 15 }}></div>
-      <Sidebar
-        isOpen={isSidebarOpen}
-        closeSidebar={() => setIsSidebarOpen(false)}
-      />
+      <Sidebar />
       <ReactQueryDevtools />
     </QueryClientProvider>
   );

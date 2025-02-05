@@ -3,9 +3,11 @@ import TwoLayersIcon from "../../assets/two-layers.svg";
 import ThreeLayersIcon from "../../assets/three-layers.svg";
 import { MEAL_LIST_TAB, NEXT_MEALS_TAB } from "../../constants";
 import { useTab } from "../../contexts/TabContext";
+import { useSidebar } from "../../contexts/SidebarContext";
 
-export function Header({ openSidebar }) {
+export function Header() {
   const { tab, setTab } = useTab();
+  const { openSidebar } = useSidebar();
 
   return (
     <div

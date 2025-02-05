@@ -1,7 +1,7 @@
 import { createContext, useContext, useState } from "react";
 import { NEXT_MEALS_TAB } from "../constants";
 
-const TabContext = createContext(NEXT_MEALS_TAB);
+const TabContext = createContext(null);
 
 export const useTab = () => useContext(TabContext);
 
