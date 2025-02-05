@@ -11,10 +11,13 @@ export function Header() {
   return (
     <div
       style={{
-        margin: 25,
+        padding: 25,
         display: "flex",
         alignItems: "center",
-        position: "relative",
+        position: "sticky",
+        backgroundColor: "#efe3c2",
+        zIndex: 1000,
+        top: 0,
       }}
     >
       <h1
@@ -31,14 +34,14 @@ export function Header() {
         <img
           src={MenuIcon}
           alt="menu"
-          style={{ cursor: "pointer", position: "absolute", left: 0 }}
+          style={{ cursor: "pointer", position: "absolute", left: 25 }}
           onClick={openSidebar}
         />
       ) : (
         <img
           src={LeftArrowIcon}
           alt="back"
-          style={{ cursor: "pointer", position: "absolute", left: 0 }}
+          style={{ cursor: "pointer", position: "absolute", left: 25 }}
           onClick={() => setTab(NEXT_MEALS_TAB)}
         />
       )}

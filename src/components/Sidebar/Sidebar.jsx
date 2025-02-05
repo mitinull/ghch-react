@@ -29,6 +29,7 @@ export function Sidebar() {
           pointerEvents: sidebarIsOpen ? undefined : "none",
           opacity: sidebarIsOpen ? undefined : 0,
           transition: ".3s ease-out",
+          zIndex: 2000,
         }}
         onClick={closeSidebar}
       ></div>
@@ -45,6 +46,7 @@ export function Sidebar() {
           textAlign: "left",
           translate: sidebarIsOpen ? undefined : "-100%",
           transition: ".3s ease-out",
+          zIndex: 3000,
         }}
         dir="ltr"
       >
