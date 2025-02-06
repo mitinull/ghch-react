@@ -7,3 +7,5 @@ export const DAY_IN_MS = 24 * 60 * 60 * 1000;
 
 export const NEXT_MEALS_TAB = 0;
 export const MEAL_LIST_TAB = 1;
+export const INSTALL_TUTORIAL_TAB = 2;
+export const ABOUT_US_TAB = 3;

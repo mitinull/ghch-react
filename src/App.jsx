@@ -3,21 +3,45 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import "./App.css";
 import { MealList } from "./components/MealList/MealList";
 import { NextMeals } from "./components/NextMeals/NextMeals";
-import { Header } from "./components/Header/Header";
 import { useTab } from "./contexts/TabContext";
-import { MEAL_LIST_TAB, NEXT_MEALS_TAB } from "./constants";
+import {
+  ABOUT_US_TAB,
+  INSTALL_TUTORIAL_TAB,
+  MEAL_LIST_TAB,
+  NEXT_MEALS_TAB,
+} from "./constants";
+import { Sidebar } from "./components/Sidebar/Sidebar";
+import { InstallTutorial } from "./components/InstallTutorial/InstallTutorial";
+import { AboutUs } from "./components/AboutUs/AboutUs";
+import { useEffect } from "react";
+import { useSidebar } from "./contexts/SidebarContext";
 
 const queryClient = new QueryClient();
 
 function App() {
-  const { tab } = useTab();
+  const { tab, setTab } = useTab();
+  const { setSidebarIsOpen } = useSidebar();
+
+  const setStatesFromHistory = () => {
+    setTab(window.history.state?.tab || NEXT_MEALS_TAB);
+    setSidebarIsOpen(window.history.state?.sidebarIsOpen);
+  };
+
+  useEffect(setStatesFromHistory, []);
+
+  useEffect(() => {
+    window.addEventListener("popstate", setStatesFromHistory);
+    return () => window.removeEventListener("popstate", setStatesFromHistory);
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Header />
       {tab === NEXT_MEALS_TAB && <NextMeals />}
       {tab === MEAL_LIST_TAB && <MealList />}
+      {tab === INSTALL_TUTORIAL_TAB && <InstallTutorial />}
+      {tab === ABOUT_US_TAB && <AboutUs />}
       <div style={{ marginBottom: 15 }}></div>
+      <Sidebar />
       <ReactQueryDevtools />
     </QueryClientProvider>
   );

@@ -1,45 +1,53 @@
 import MenuIcon from "../../assets/menu.svg";
-import TwoLayersIcon from "../../assets/two-layers.svg";
-import ThreeLayersIcon from "../../assets/three-layers.svg";
+import LeftArrowIcon from "../../assets/left-arrow.svg";
 import { MEAL_LIST_TAB, NEXT_MEALS_TAB } from "../../constants";
 import { useTab } from "../../contexts/TabContext";
+import { useSidebar } from "../../contexts/SidebarContext";
 
-export function Header() {
+export function Header({ title, hasMenu }) {
   const { tab, setTab } = useTab();
+  const { openSidebar } = useSidebar();
 
   return (
     <div
       style={{
-        margin: 25,
+        top: 0,
+        padding: 25,
+        zIndex: 1000,
         display: "flex",
         alignItems: "center",
-        justifyContent: "space-between",
+        position: "sticky",
+        backgroundColor: "#efe3c2",
       }}
     >
-      {tab === NEXT_MEALS_TAB && (
-        <img
-          src={TwoLayersIcon}
-          alt="menu"
-          onClick={() => setTab(MEAL_LIST_TAB)}
-        />
-      )}
-      {tab === MEAL_LIST_TAB && (
-        <img
-          src={ThreeLayersIcon}
-          alt="menu"
-          onClick={() => setTab(NEXT_MEALS_TAB)}
-        />
-      )}
       <h1
         style={{
           fontWeight: 700,
           fontSize: 18,
           textAlign: "center",
+          flex: 1,
         }}
       >
-        {tab === NEXT_MEALS_TAB ? "غذا چیه؟" : "برنامهٔ غذایی"}
+        {title}
       </h1>
-      <img src={MenuIcon} alt="menu" />
+      {hasMenu ? (
+        <img
+          src={MenuIcon}
+          alt="menu"
+          style={{ cursor: "pointer", position: "absolute", left: 25 }}
+          onClick={openSidebar}
+        />
+      ) : (
+        <img
+          src={LeftArrowIcon}
+          alt="back"
+          style={{ cursor: "pointer", position: "absolute", left: 25 }}
+          onClick={() => {
+            window.history.back();
+            setTab(window.history.state || NEXT_MEALS_TAB);
+          }}
+        />
+      )}
     </div>
   );
 }

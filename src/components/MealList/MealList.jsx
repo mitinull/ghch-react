@@ -1,5 +1,6 @@
 import { Meal } from "../Meal/Meal";
 import { useMeals } from "../../hooks/useMeals";
+import { Header } from "../Header/Header";
 
 export function MealList() {
   const { isPending, isError, meals } = useMeals();
@@ -9,18 +10,22 @@ export function MealList() {
   if (isError) return <div>خطا در بارگیری اطلاعات.</div>;
 
   return (
-    <div
-      style={{
-        gap: 12,
-        display: "flex",
-        paddingLeft: 10,
-        paddingRight: 10,
-        flexDirection: "column",
-      }}
-    >
-      {meals.map((meal) => (
-        <Meal key={meal.date + meal.timeMeal} meal={meal} />
-      ))}
+    <div>
+      <Header title="برنامهٔ غذایی" />
+      <div
+        style={{
+          gap: 12,
+          display: "flex",
+          paddingLeft: 10,
+          paddingRight: 10,
+          flexDirection: "column",
+        }}
+        className="page-enter"
+      >
+        {meals.map((meal) => (
+          <Meal key={meal.date + meal.timeMeal} meal={meal} />
+        ))}
+      </div>
     </div>
   );
 }
