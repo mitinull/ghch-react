@@ -18,7 +18,7 @@ export function useMeals() {
 
   useEffect(() => {
     if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.addEventListener("message", (event) => {
+      const messageHandler = (event) => {
         if (
           event.data &&
           event.data.type === "CACHE_UPDATED" &&
@@ -32,7 +32,13 @@ export function useMeals() {
             queryClient.setQueriesData({ queryKey: ["dorm"] }, data);
           }
         }
-      });
+      };
+
+      navigator.serviceWorker.addEventListener("message", messageHandler);
+
+      return () => {
+        navigator.serviceWorker.removeEventListener("message", messageHandler);
+      };
     }
   }, [queryClient]);
 

@@ -1,9 +1,7 @@
 import { DAY_IN_MS } from "../../constants";
 import { isToday, toDate } from "../../utils/date-utils";
 
-export function findNextMealIndex(meals) {
-  const now = new Date();
-
+export function findNextMealIndex(meals, now) {
   let nextMealIndex = meals.findIndex(
     (meal) => now.getTime() < toDate(meal.date).getTime() + DAY_IN_MS
   );

@@ -1,16 +1,32 @@
 import { useMeals } from "../../hooks/useMeals";
-import { Header } from "../Header/Header";
 import { Meal } from "../Meal/Meal";
 import { findNextMealIndex } from "./findNextMealIndex";
+import { useTime } from "../../hooks/useTime";
+import { LoadingCard } from "../LoadingCard/LoadingCard";
+import { PageWrapper } from "../PageWrapper/PageWrapper";
 
 export function NextMeals() {
+  const { time } = useTime();
   const { isPending, isError, meals } = useMeals();
+  const title = "غذا چیه؟";
+  const hasMenu = true;
 
-  if (isPending) return <div>درحال بارگیری...</div>;
+  if (isPending)
+    return (
+      <PageWrapper title={title} hasMenu={hasMenu}>
+        <LoadingCard />
+        <LoadingCard />
+      </PageWrapper>
+    );
 
-  if (isError) return <div>خطا در بارگیری اطلاعات.</div>;
+  if (isError)
+    return (
+      <PageWrapper title={title} hasMenu={hasMenu}>
+        <div>خطا در بارگیری اطلاعات.</div>
+      </PageWrapper>
+    );
 
-  const nextMealIndex = findNextMealIndex(meals);
+  const nextMealIndex = findNextMealIndex(meals, time);
 
   const hasSecondMeal = !!meals[nextMealIndex + 1];
 
@@ -35,21 +51,9 @@ export function NextMeals() {
   }
 
   return (
-    <div>
-      <Header title="غذا چیه؟" hasMenu />
-      <div
-        style={{
-          gap: 12,
-          display: "flex",
-          paddingLeft: 10,
-          paddingRight: 10,
-          flexDirection: "column",
-        }}
-        className="page-enter"
-      >
-        <Meal meal={meals[nextMealIndex]} />
-        {hasSecondMeal && <Meal meal={meals[nextMealIndex + 1]} />}
-      </div>
-    </div>
+    <PageWrapper title={title} hasMenu={hasMenu}>
+      <Meal meal={meals[nextMealIndex]} />
+      {hasSecondMeal && <Meal meal={meals[nextMealIndex + 1]} />}
+    </PageWrapper>
   );
 }

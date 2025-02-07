@@ -35,7 +35,7 @@ export function AboutUs() {
           />
           <Developer
             title="با تشکر از مشارکت"
-            name="سید محمد مهدی احمدی"
+            name="محمد مهدی احمدی"
             detail="ورودی ۱۴۰۰ علوم کامپیوتر دانشگاه تهران"
           />
         </div>
