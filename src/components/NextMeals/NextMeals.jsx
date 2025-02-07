@@ -1,16 +1,19 @@
+import { useEffect, useState } from "react";
 import { useMeals } from "../../hooks/useMeals";
 import { Header } from "../Header/Header";
 import { Meal } from "../Meal/Meal";
 import { findNextMealIndex } from "./findNextMealIndex";
+import { useTime } from "../../hooks/useTime";
 
 export function NextMeals() {
+  const { time } = useTime();
   const { isPending, isError, meals } = useMeals();
 
   if (isPending) return <div>درحال بارگیری...</div>;
 
   if (isError) return <div>خطا در بارگیری اطلاعات.</div>;
 
-  const nextMealIndex = findNextMealIndex(meals);
+  const nextMealIndex = findNextMealIndex(meals, time);
 
   const hasSecondMeal = !!meals[nextMealIndex + 1];
 
