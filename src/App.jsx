@@ -16,6 +16,24 @@ import { AboutUs } from "./components/AboutUs/AboutUs";
 import { useEffect } from "react";
 import { useSidebar } from "./contexts/SidebarContext";
 
+const handleLoad = () => {
+  console.log("Page fully loaded, now loading Clicky...");
+  if (window.clicky) return; // Prevent duplicate loading
+
+  const script = document.createElement("script");
+  script.src = "//static.getclicky.com/js";
+  script.async = true;
+  script.dataset.id = "101477486";
+
+  script.onload = () => {
+    window.clickyReady = true;
+  };
+
+  document.head.appendChild(script);
+};
+
+window.onload = handleLoad;
+
 const queryClient = new QueryClient();
 
 function App() {
@@ -32,32 +50,6 @@ function App() {
   useEffect(() => {
     window.addEventListener("popstate", setStatesFromHistory);
     return () => window.removeEventListener("popstate", setStatesFromHistory);
-  }, []);
-
-  useEffect(() => {
-    const handleLoad = () => {
-      console.log("Page fully loaded, now loading Clicky...");
-      if (window.clicky) return; // Prevent duplicate loading
-
-      const script = document.createElement("script");
-      script.src = "//static.getclicky.com/js";
-      script.async = true;
-      script.dataset.id = "101477486";
-
-      script.onload = () => {
-        window.clickyReady = true;
-      };
-
-      document.body.appendChild(script);
-    };
-
-    // Add event listener for when the page is fully loaded
-    window.addEventListener("load", handleLoad);
-    console.log('event added');
-
-    return () => {
-      window.removeEventListener("load", handleLoad);
-    };
   }, []);
 
   useEffect(() => {
