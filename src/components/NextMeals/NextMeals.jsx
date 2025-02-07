@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { useMeals } from "../../hooks/useMeals";
 import { Header } from "../Header/Header";
 import { Meal } from "../Meal/Meal";
