@@ -36,6 +36,7 @@ function App() {
 
   useEffect(() => {
     const handleLoad = () => {
+      console.log("Page fully loaded, now loading Clicky...");
       if (window.clicky) return; // Prevent duplicate loading
 
       const script = document.createElement("script");
