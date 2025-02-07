@@ -34,6 +34,40 @@ function App() {
     return () => window.removeEventListener("popstate", setStatesFromHistory);
   }, []);
 
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "//static.getclicky.com/js";
+    script.async = true;
+    script.dataset.id = "101477486";
+
+    script.onload = () => {
+      console.log("Clicky loaded");
+      window.clickyReady = true;
+    };
+
+    script.onerror = () => {
+      console.warn("Clicky failed to load");
+    };
+
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleFocus = () => {
+      if (window.clickyReady && window.clicky) {
+        window.clicky.log("mount", "mount");
+        console.log("mount");
+      }
+    };
+
+    window.addEventListener("focus", handleFocus);
+    return () => window.removeEventListener("focus", handleFocus);
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       {tab === NEXT_MEALS_TAB && <NextMeals />}
