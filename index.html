@@ -21,10 +21,10 @@
 <body>
   <div id="root"></div>
   <script type="module" src="/src/main.jsx"></script>
-  <a title="GDPR-compliant Web Analytics" href="https://clicky.com/101477486"><img alt="Clicky"
-      src="//static.getclicky.com/media/links/badge.gif" border="0" /></a>
-  <script async data-id="101477486" src="//static.getclicky.com/js"></script>
-    hello
+  <script async data-id="101477486" src="//static.getclicky.com/js">
+    window.onfocus = clicky.log('on_mount_href', 'on_mount_title')
+  </script>
+
 </body>
 
 </html>
