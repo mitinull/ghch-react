@@ -53,6 +53,7 @@ function App() {
 
     // Add event listener for when the page is fully loaded
     window.addEventListener("load", handleLoad);
+    console.log('event added');
 
     return () => {
       window.removeEventListener("load", handleLoad);
