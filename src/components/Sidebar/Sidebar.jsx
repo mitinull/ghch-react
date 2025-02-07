@@ -115,7 +115,7 @@ export function Sidebar() {
             </SidebarItem>
           </a>
           <a href="https://reymit.ir/ghaza" target="_blank">
-            <SidebarItem icon={DollarIcon}>حمایت مالی</SidebarItem>
+            <SidebarItem icon={DollarIcon}>برو به صفحهٔ دونیت</SidebarItem>
           </a>
         </div>
       </div>
