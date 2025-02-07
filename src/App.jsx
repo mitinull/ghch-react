@@ -35,32 +35,33 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "//static.getclicky.com/js";
-    script.async = true;
-    script.dataset.id = "101477486";
+    const handleLoad = () => {
+      if (window.clicky) return; // Prevent duplicate loading
 
-    script.onload = () => {
-      console.log("Clicky loaded");
-      window.clickyReady = true;
+      const script = document.createElement("script");
+      script.src = "//static.getclicky.com/js";
+      script.async = true;
+      script.dataset.id = "101477486";
+
+      script.onload = () => {
+        window.clickyReady = true;
+      };
+
+      document.body.appendChild(script);
     };
 
-    script.onerror = () => {
-      console.warn("Clicky failed to load");
-    };
-
-    document.body.appendChild(script);
+    // Add event listener for when the page is fully loaded
+    window.addEventListener("load", handleLoad);
 
     return () => {
-      document.body.removeChild(script);
+      window.removeEventListener("load", handleLoad);
     };
   }, []);
 
   useEffect(() => {
     const handleFocus = () => {
       if (window.clickyReady && window.clicky) {
-        window.clicky.log("mount", "mount");
-        console.log("mount");
+        window.clicky.log("focus", "focus");
       }
     };
 
