@@ -1,31 +1,33 @@
 import { Meal } from "../Meal/Meal";
 import { useMeals } from "../../hooks/useMeals";
-import { Header } from "../Header/Header";
+import { PageWrapper } from "../PageWrapper/PageWrapper";
+import { LoadingCard } from "../LoadingCard/LoadingCard";
 
 export function MealList() {
   const { isPending, isError, meals } = useMeals();
+  const title = "برنامهٔ غذایی";
+  const hasMenu = false;
 
-  if (isPending) return <div>درحال بارگیری...</div>;
+  if (isPending)
+    return (
+      <PageWrapper title={title} hasMenu={hasMenu}>
+        <LoadingCard />
+        <LoadingCard />
+      </PageWrapper>
+    );
 
-  if (isError) return <div>خطا در بارگیری اطلاعات.</div>;
+  if (isError)
+    return (
+      <PageWrapper title={title} hasMenu={hasMenu}>
+        <div>خطا در بارگیری اطلاعات.</div>
+      </PageWrapper>
+    );
 
   return (
-    <div>
-      <Header title="برنامهٔ غذایی" />
-      <div
-        style={{
-          gap: 12,
-          display: "flex",
-          paddingLeft: 10,
-          paddingRight: 10,
-          flexDirection: "column",
-        }}
-        className="page-enter"
-      >
-        {meals.map((meal) => (
-          <Meal key={meal.date + meal.timeMeal} meal={meal} />
-        ))}
-      </div>
-    </div>
+    <PageWrapper title={title} hasMenu={hasMenu}>
+      {meals.map((meal) => (
+        <Meal key={meal.date + meal.timeMeal} meal={meal} />
+      ))}
+    </PageWrapper>
   );
 }
