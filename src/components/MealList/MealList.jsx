@@ -2,11 +2,14 @@ import { Meal } from "../Meal/Meal";
 import { useMeals } from "../../hooks/useMeals";
 import { PageWrapper } from "../PageWrapper/PageWrapper";
 import { LoadingCard } from "../LoadingCard/LoadingCard";
+import { useClickyMount } from "../../hooks/useClickyFocus";
 
 export function MealList() {
   const { isPending, isError, meals } = useMeals();
   const title = "برنامهٔ غذایی";
   const hasMenu = false;
+
+  useClickyMount("food-plan");
 
   if (isPending)
     return (

@@ -4,12 +4,15 @@ import { findNextMealIndex } from "./findNextMealIndex";
 import { useTime } from "../../hooks/useTime";
 import { LoadingCard } from "../LoadingCard/LoadingCard";
 import { PageWrapper } from "../PageWrapper/PageWrapper";
+import { useClickyMount } from "../../hooks/useClickyFocus";
 
 export function NextMeals() {
   const { time } = useTime();
   const { isPending, isError, meals } = useMeals();
   const title = "غذا چیه؟";
   const hasMenu = true;
+
+  useClickyMount("main-page");
 
   if (isPending)
     return (

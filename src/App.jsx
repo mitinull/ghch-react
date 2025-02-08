@@ -16,6 +16,23 @@ import { AboutUs } from "./components/AboutUs/AboutUs";
 import { useEffect } from "react";
 import { useSidebar } from "./contexts/SidebarContext";
 
+const handleLoad = () => {
+  if (window.clicky) return; // Prevent duplicate loading
+
+  const script = document.createElement("script");
+  script.src = "//static.getclicky.com/js";
+  script.async = true;
+  script.dataset.id = "101477486";
+
+  script.onload = () => {
+    window.clickyReady = true;
+  };
+
+  document.head.appendChild(script);
+};
+
+window.onload = handleLoad;
+
 const queryClient = new QueryClient();
 
 function App() {
@@ -32,6 +49,17 @@ function App() {
   useEffect(() => {
     window.addEventListener("popstate", setStatesFromHistory);
     return () => window.removeEventListener("popstate", setStatesFromHistory);
+  }, []);
+
+  useEffect(() => {
+    const handleFocus = () => {
+      if (window.clickyReady && window.clicky) {
+        window.clicky.log("focus", "focus");
+      }
+    };
+
+    window.addEventListener("focus", handleFocus);
+    return () => window.removeEventListener("focus", handleFocus);
   }, []);
 
   return (

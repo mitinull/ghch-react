@@ -2,8 +2,11 @@ import { Header } from "../Header/Header";
 import GridIcon from "../../assets/grid.svg";
 import GithubIcon from "../../assets/github.svg";
 import MailIcon from "../../assets/mail.svg";
+import { useClickyMount } from "../../hooks/useClickyFocus";
 
 export function AboutUs() {
+  useClickyMount("about-us");
+
   return (
     <div>
       <Header title="دربارهٔ ما" />

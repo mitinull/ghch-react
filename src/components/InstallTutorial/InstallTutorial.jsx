@@ -1,6 +1,9 @@
+import { useClickyMount } from "../../hooks/useClickyFocus";
 import { Header } from "../Header/Header";
 
 export function InstallTutorial() {
+  useClickyMount("install-tutorial");
+
   return (
     <div>
       <Header title="آموزش نصب" />
