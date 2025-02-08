@@ -17,7 +17,6 @@ import { useEffect } from "react";
 import { useSidebar } from "./contexts/SidebarContext";
 
 const handleLoad = () => {
-  console.log("Page fully loaded, now loading Clicky...");
   if (window.clicky) return; // Prevent duplicate loading
 
   const script = document.createElement("script");
