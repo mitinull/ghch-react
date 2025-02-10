@@ -30,19 +30,34 @@ export function Setting() {
       >
         <CheckBoxItem
           checked={foodScope === JUST_SELF}
-          onClick={() => setFoodScope(JUST_SELF)}
+          onClick={() => {
+            setFoodScope(JUST_SELF);
+            if (window.clickyReady && window.clicky) {
+              window.clicky.log("option", "just-self");
+            }
+          }}
         >
           فقط غذای دانشگاه رو نشون بده
         </CheckBoxItem>
         <CheckBoxItem
           checked={foodScope === JUST_DORM}
-          onClick={() => setFoodScope(JUST_DORM)}
+          onClick={() => {
+            setFoodScope(JUST_DORM);
+            if (window.clickyReady && window.clicky) {
+              window.clicky.log("option", "just-dorm");
+            }
+          }}
         >
           فقط غذای خوابگاه رو نشون بده
         </CheckBoxItem>
         <CheckBoxItem
           checked={foodScope === SELF_AND_DORM}
-          onClick={() => setFoodScope(SELF_AND_DORM)}
+          onClick={() => {
+            setFoodScope(SELF_AND_DORM);
+            if (window.clickyReady && window.clicky) {
+              window.clicky.log("option", "self-and-dorm");
+            }
+          }}
         >
           غذای دانشگاه و خوابگاه رو نشون بده
         </CheckBoxItem>
