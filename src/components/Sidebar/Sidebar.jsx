@@ -117,12 +117,28 @@ export function Sidebar() {
               margin: "15px 0",
             }}
           />
-          <a href="http://dining2.ut.ac.ir/" target="_blank">
+          <a
+            href="http://dining2.ut.ac.ir/"
+            target="_blank"
+            onClick={() => {
+              if (window.clickyReady && window.clicky) {
+                window.clicky.log("external-link", "dining");
+              }
+            }}
+          >
             <SidebarItem icon={ExternalLinkIcon}>
               برو به سایت رزرو غذا
             </SidebarItem>
           </a>
-          <a href="https://reymit.ir/ghaza" target="_blank">
+          <a
+            href="https://reymit.ir/ghaza"
+            target="_blank"
+            onClick={() => {
+              if (window.clickyReady && window.clicky) {
+                window.clicky.log("external-link", "reymit");
+              }
+            }}
+          >
             <SidebarItem icon={DollarIcon}>برو به صفحهٔ دونیت</SidebarItem>
           </a>
         </div>
