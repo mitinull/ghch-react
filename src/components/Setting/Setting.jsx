@@ -3,12 +3,15 @@ import { Header } from "../Header/Header";
 import { JUST_DORM, JUST_SELF, SELF_AND_DORM } from "../../constants";
 import CircleIcon from "../../assets/circle.svg";
 import CheckCircleIcon from "../../assets/check-circle.svg";
+import { useClickyMount } from "../../hooks/useClickyFocus";
 
 export function Setting() {
   const [foodScope, setFoodScope] = useLocalStorage(
     "food-scope",
     SELF_AND_DORM
   );
+
+  useClickyMount("setting");
 
   return (
     <div>
