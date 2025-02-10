@@ -1,4 +1,5 @@
 import CalendarIcon from "../../assets/calendar.svg";
+import SettingIcon from "../../assets/setting.svg";
 import BoxIcon from "../../assets/box.svg";
 import UserIcon from "../../assets/user.svg";
 import DollarIcon from "../../assets/dollar.svg";
@@ -9,6 +10,7 @@ import {
   INSTALL_TUTORIAL_TAB,
   MEAL_LIST_TAB,
   NEXT_MEALS_TAB,
+  SETTING_TAP,
 } from "../../constants";
 import { useSidebar } from "../../contexts/SidebarContext";
 
@@ -85,6 +87,12 @@ export function Sidebar() {
             )}
           >
             برنامهٔ غذایی
+          </SidebarItem>
+          <SidebarItem
+            icon={SettingIcon}
+            onClick={handleItemClick(SETTING_TAP, () => setTab(SETTING_TAP))}
+          >
+            تنظیمات
           </SidebarItem>
           <SidebarItem
             icon={BoxIcon}
