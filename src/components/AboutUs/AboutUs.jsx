@@ -120,14 +120,14 @@ function ExternalLink({ title, icon, linkText, linkHref }) {
         <a
           href={linkHref}
           target="_blank"
-          style={{ textDecoration: "underline" }}
+          // style={{ textDecoration: "underline" }}
           onClick={() => {
             if (window.clickyReady && window.clicky) {
-              window.clicky.log("external-link", linkHref);
+              window.clicky.log(linkText, linkHref);
             }
           }}
         >
-          {linkText}
+          test
         </a>
       </div>
     </div>

@@ -122,7 +122,7 @@ export function Sidebar() {
             target="_blank"
             onClick={() => {
               if (window.clickyReady && window.clicky) {
-                window.clicky.log("external-link", "dining");
+                window.clicky.log("dining", "dining");
               }
             }}
           >
@@ -135,7 +135,7 @@ export function Sidebar() {
             target="_blank"
             onClick={() => {
               if (window.clickyReady && window.clicky) {
-                window.clicky.log("external-link", "reymit");
+                window.clicky.log("reymit", "reymit");
               }
             }}
           >

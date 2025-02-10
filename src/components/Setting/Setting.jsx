@@ -33,7 +33,7 @@ export function Setting() {
           onClick={() => {
             setFoodScope(JUST_SELF);
             if (window.clickyReady && window.clicky) {
-              window.clicky.log("option", "just-self");
+              window.clicky.log("just-self", "just-self");
             }
           }}
         >
@@ -44,7 +44,7 @@ export function Setting() {
           onClick={() => {
             setFoodScope(JUST_DORM);
             if (window.clickyReady && window.clicky) {
-              window.clicky.log("option", "just-dorm");
+              window.clicky.log("just-dorm", "just-dorm");
             }
           }}
         >
@@ -55,7 +55,7 @@ export function Setting() {
           onClick={() => {
             setFoodScope(SELF_AND_DORM);
             if (window.clickyReady && window.clicky) {
-              window.clicky.log("option", "self-and-dorm");
+              window.clicky.log("self-and-dorm", "self-and-dorm");
             }
           }}
         >
