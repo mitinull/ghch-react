@@ -32,7 +32,7 @@ export function AboutUs() {
           }}
         >
           <Developer
-            title="توسعه‌دنده"
+            title="توسعه‌دهنده"
             name="محمد ترابی (mitinull)"
             detail="ورودی ۹۹ علوم کامپیوتر دانشگاه تهران"
           />
