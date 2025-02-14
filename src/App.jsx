@@ -9,12 +9,14 @@ import {
   INSTALL_TUTORIAL_TAB,
   MEAL_LIST_TAB,
   NEXT_MEALS_TAB,
+  SETTING_TAP,
 } from "./constants";
 import { Sidebar } from "./components/Sidebar/Sidebar";
 import { InstallTutorial } from "./components/InstallTutorial/InstallTutorial";
 import { AboutUs } from "./components/AboutUs/AboutUs";
 import { useEffect } from "react";
 import { useSidebar } from "./contexts/SidebarContext";
+import { Setting } from "./components/Setting/Setting";
 
 const handleLoad = () => {
   if (window.clicky) return; // Prevent duplicate loading
@@ -22,7 +24,7 @@ const handleLoad = () => {
   const script = document.createElement("script");
   script.src = "//static.getclicky.com/js";
   script.async = true;
-  script.dataset.id = "101477540";
+  script.dataset.id = "101477486";
 
   script.onload = () => {
     window.clickyReady = true;
@@ -66,6 +68,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       {tab === NEXT_MEALS_TAB && <NextMeals />}
       {tab === MEAL_LIST_TAB && <MealList />}
+      {tab === SETTING_TAP && <Setting />}
       {tab === INSTALL_TUTORIAL_TAB && <InstallTutorial />}
       {tab === ABOUT_US_TAB && <AboutUs />}
       <div style={{ marginBottom: 15 }}></div>

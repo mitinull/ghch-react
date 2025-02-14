@@ -121,6 +121,11 @@ function ExternalLink({ title, icon, linkText, linkHref }) {
           href={linkHref}
           target="_blank"
           style={{ textDecoration: "underline" }}
+          onClick={() => {
+            if (window.clickyReady && window.clicky) {
+              window.clicky.log(linkText, linkHref);
+            }
+          }}
         >
           {linkText}
         </a>

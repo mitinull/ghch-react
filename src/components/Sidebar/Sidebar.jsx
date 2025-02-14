@@ -1,4 +1,5 @@
 import CalendarIcon from "../../assets/calendar.svg";
+import SettingIcon from "../../assets/setting.svg";
 import BoxIcon from "../../assets/box.svg";
 import UserIcon from "../../assets/user.svg";
 import DollarIcon from "../../assets/dollar.svg";
@@ -9,6 +10,7 @@ import {
   INSTALL_TUTORIAL_TAB,
   MEAL_LIST_TAB,
   NEXT_MEALS_TAB,
+  SETTING_TAP,
 } from "../../constants";
 import { useSidebar } from "../../contexts/SidebarContext";
 
@@ -87,6 +89,12 @@ export function Sidebar() {
             برنامهٔ غذایی
           </SidebarItem>
           <SidebarItem
+            icon={SettingIcon}
+            onClick={handleItemClick(SETTING_TAP, () => setTab(SETTING_TAP))}
+          >
+            تنظیمات
+          </SidebarItem>
+          <SidebarItem
             icon={BoxIcon}
             onClick={handleItemClick(INSTALL_TUTORIAL_TAB, () =>
               setTab(INSTALL_TUTORIAL_TAB)
@@ -109,12 +117,28 @@ export function Sidebar() {
               margin: "15px 0",
             }}
           />
-          <a href="http://dining2.ut.ac.ir/" target="_blank">
+          <a
+            href="http://dining2.ut.ac.ir/"
+            target="_blank"
+            onClick={() => {
+              if (window.clickyReady && window.clicky) {
+                window.clicky.log("dining", "dining");
+              }
+            }}
+          >
             <SidebarItem icon={ExternalLinkIcon}>
               برو به سایت رزرو غذا
             </SidebarItem>
           </a>
-          <a href="https://reymit.ir/ghaza" target="_blank">
+          <a
+            href="https://reymit.ir/ghaza"
+            target="_blank"
+            onClick={() => {
+              if (window.clickyReady && window.clicky) {
+                window.clicky.log("reymit", "reymit");
+              }
+            }}
+          >
             <SidebarItem icon={DollarIcon}>برو به صفحهٔ دونیت</SidebarItem>
           </a>
         </div>
