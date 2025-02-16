@@ -24,7 +24,7 @@ const handleLoad = () => {
   const script = document.createElement("script");
   script.src = "//static.getclicky.com/js";
   script.async = true;
-  script.dataset.id = "101477486";
+  script.dataset.id = "101477540";
 
   script.onload = () => {
     window.clickyReady = true;
