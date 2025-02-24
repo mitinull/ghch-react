@@ -26,8 +26,6 @@ const handleLoad = () => {
   script.async = true;
   script.dataset.id = import.meta.env.VITE_CLICKY_ID;
 
-  console.log("env", import.meta.env.VITE_CLICKY_ID);
-
   script.onload = () => {
     window.clickyReady = true;
   };
