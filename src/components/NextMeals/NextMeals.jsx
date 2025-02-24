@@ -5,10 +5,11 @@ import { useTime } from "../../hooks/useTime";
 import { LoadingCard } from "../LoadingCard/LoadingCard";
 import { PageWrapper } from "../PageWrapper/PageWrapper";
 import { useClickyMount } from "../../hooks/useClickyFocus";
+import { ErrorMessage } from "../ErrorMessage/ErrorMessage";
 
 export function NextMeals() {
   const { time } = useTime();
-  const { isPending, isError, meals } = useMeals();
+  const { isPending, isError, isFetching, meals } = useMeals();
   const title = "غذا چیه؟";
   const hasMenu = true;
 
@@ -25,7 +26,7 @@ export function NextMeals() {
   if (isError)
     return (
       <PageWrapper title={title} hasMenu={hasMenu}>
-        <div>خطا در بارگیری اطلاعات.</div>
+        <ErrorMessage>خطا در بارگیری اطلاعات!</ErrorMessage>
       </PageWrapper>
     );
 
@@ -35,21 +36,16 @@ export function NextMeals() {
 
   if (nextMealIndex === -1 || !meals[nextMealIndex]) {
     return (
-      <div style={{ padding: "0 12px" }} className="page-enter">
-        <div
-          style={{
-            fontSize: 20,
-            color: "white",
-            borderRadius: 5,
-            fontWeight: 600,
-            textAlign: "center",
-            padding: "40px 30px",
-            backgroundColor: "#123524",
-          }}
-        >
-          وعدهٔ بعدی یافت نشد!
-        </div>
-      </div>
+      <PageWrapper title={title} hasMenu={hasMenu}>
+        {isFetching ? (
+          <>
+            <LoadingCard />
+            <LoadingCard />
+          </>
+        ) : (
+          <ErrorMessage>وعدهٔ بعدی یافت نشد!</ErrorMessage>
+        )}
+      </PageWrapper>
     );
   }
 

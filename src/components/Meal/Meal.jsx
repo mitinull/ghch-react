@@ -4,7 +4,7 @@ import { parseFood } from "../../utils/string-utils";
 export function Meal({ meal }) {
   const isMealToday = isToday(meal.date);
   const isMealTomorrow = isTomorrow(meal.date);
-  const isLunchTime = meal.timeMeal === "ناهار";
+  const isLunchTime = meal.timeMeal === "ناهار" || meal.timeMeal === "سحر";
 
   return (
     <div
