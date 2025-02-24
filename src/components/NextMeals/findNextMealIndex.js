@@ -8,9 +8,10 @@ export function findNextMealIndex(meals, now) {
   if (nextMealIndex === -1) return -1;
 
   if (
-    now.getHours() > 15 &&
+    now.getHours() >= 15 &&
     isToday(meals[nextMealIndex].date) &&
-    meals[nextMealIndex].timeMeal === "ناهار"
+    (meals[nextMealIndex].timeMeal === "ناهار" ||
+      meals[nextMealIndex].timeMeal === "سحر")
   ) {
     nextMealIndex++;
   }
