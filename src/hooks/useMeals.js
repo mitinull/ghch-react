@@ -1,11 +1,5 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import {
-  DORM_URL,
-  JUST_DORM,
-  JUST_SELF,
-  SELF_AND_DORM,
-  SELF_URL,
-} from "../constants";
+import { JUST_DORM, JUST_SELF, SELF_AND_DORM } from "../constants";
 import { toDate } from "../utils/date-utils";
 import { useEffect } from "react";
 import useLocalStorage from "use-local-storage";
@@ -21,13 +15,15 @@ export function useMeals() {
 
   const selfQuery = useQuery({
     queryKey: ["self"],
-    queryFn: () => fetch(SELF_URL).then((res) => res.json()),
+    queryFn: () =>
+      fetch(import.meta.env.VITE_SELF_URL).then((res) => res.json()),
     enabled: selfFlag,
   });
 
   const dormQuery = useQuery({
     queryKey: ["dorm"],
-    queryFn: () => fetch(DORM_URL).then((res) => res.json()),
+    queryFn: () =>
+      fetch(import.meta.env.VITE_DORM_URL).then((res) => res.json()),
     enabled: dormFlag,
   });
 
