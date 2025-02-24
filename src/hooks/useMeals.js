@@ -67,5 +67,9 @@ export function useMeals() {
 
   const sortedMeals = meals.sort((m1, m2) => toDate(m1.date) - toDate(m2.date));
 
-  return { meals: sortedMeals };
+  return {
+    meals: sortedMeals,
+    isFetching:
+      (selfQuery.isFetching && selfFlag) || (dormQuery.isFetching && dormFlag),
+  };
 }

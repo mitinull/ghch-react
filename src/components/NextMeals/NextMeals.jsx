@@ -9,7 +9,7 @@ import { ErrorMessage } from "../ErrorMessage/ErrorMessage";
 
 export function NextMeals() {
   const { time } = useTime();
-  const { isPending, isError, meals } = useMeals();
+  const { isPending, isError, isFetching, meals } = useMeals();
   const title = "غذا چیه؟";
   const hasMenu = true;
 
@@ -37,7 +37,14 @@ export function NextMeals() {
   if (nextMealIndex === -1 || !meals[nextMealIndex]) {
     return (
       <PageWrapper title={title} hasMenu={hasMenu}>
-        <ErrorMessage>وعدهٔ بعدی یافت نشد!</ErrorMessage>
+        {isFetching ? (
+          <>
+            <LoadingCard />
+            <LoadingCard />
+          </>
+        ) : (
+          <ErrorMessage>وعدهٔ بعدی یافت نشد!</ErrorMessage>
+        )}
       </PageWrapper>
     );
   }
