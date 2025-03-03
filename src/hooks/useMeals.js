@@ -38,10 +38,10 @@ export function useMeals() {
           event.data.payload.cacheName === "google-docs-cache"
         ) {
           const { url, data } = event.data.payload;
-          if (url === SELF_URL) {
+          if (url === import.meta.env.VITE_SELF_URL) {
             queryClient.setQueriesData({ queryKey: ["self"] }, data);
           }
-          if (url === DORM_URL) {
+          if (url === import.meta.env.VITE_DORM_URL) {
             queryClient.setQueriesData({ queryKey: ["dorm"] }, data);
           }
         }
