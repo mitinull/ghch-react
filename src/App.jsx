@@ -1,9 +1,14 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { useEffect } from "react";
+import useLocalStorage from "use-local-storage";
 import "./App.css";
+import { AboutUs } from "./components/AboutUs/AboutUs";
+import { InstallTutorial } from "./components/InstallTutorial/InstallTutorial";
 import { MealList } from "./components/MealList/MealList";
 import { NextMeals } from "./components/NextMeals/NextMeals";
-import { useTab } from "./contexts/TabContext";
+import { Setting } from "./components/Setting/Setting";
+import { Sidebar } from "./components/Sidebar/Sidebar";
 import {
   ABOUT_US_TAB,
   INSTALL_TUTORIAL_TAB,
@@ -11,12 +16,8 @@ import {
   NEXT_MEALS_TAB,
   SETTING_TAP,
 } from "./constants";
-import { Sidebar } from "./components/Sidebar/Sidebar";
-import { InstallTutorial } from "./components/InstallTutorial/InstallTutorial";
-import { AboutUs } from "./components/AboutUs/AboutUs";
-import { useEffect } from "react";
 import { useSidebar } from "./contexts/SidebarContext";
-import { Setting } from "./components/Setting/Setting";
+import { useTab } from "./contexts/TabContext";
 
 const handleLoad = () => {
   if (window.clicky) return; // Prevent duplicate loading
@@ -40,6 +41,7 @@ const queryClient = new QueryClient();
 function App() {
   const { tab, setTab } = useTab();
   const { setSidebarIsOpen } = useSidebar();
+  const [visits, setVisits] = useLocalStorage("visits", 0);
 
   const setStatesFromHistory = () => {
     setTab(window.history.state?.tab || NEXT_MEALS_TAB);
@@ -62,6 +64,10 @@ function App() {
 
     window.addEventListener("focus", handleFocus);
     return () => window.removeEventListener("focus", handleFocus);
+  }, []);
+
+  useEffect(function countUserVisits() {
+    setVisits((prev) => prev + 1);
   }, []);
 
   return (
