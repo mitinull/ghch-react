@@ -45,8 +45,7 @@ export default defineConfig({
           },
           {
             urlPattern: ({ url }) =>
-              url.href.startsWith(import.meta.env.VITE_SELF_URL) ||
-              url.href.startsWith(import.meta.env.VITE_DORM_URL),
+              url.href.startsWith("https://din-api.liara.run"),
             handler: "StaleWhileRevalidate",
             options: {
               cacheName: "din-api-cache",
