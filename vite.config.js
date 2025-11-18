@@ -34,6 +34,7 @@ export default defineConfig({
         enabled: true, // Enable PWA support during development for testing
       },
       workbox: {
+        importScripts: ["swEnv.js"],
         runtimeCaching: [
           {
             urlPattern: ({ url }) => url.pathname.startsWith("/assets"),
@@ -45,7 +46,8 @@ export default defineConfig({
           },
           {
             urlPattern: ({ url }) =>
-              url.href.startsWith(process.env.VITE_SELF_URL),
+              url.href.startsWith(process.env.VITE_SELF_URL) ||
+              url.href.startsWith(process.env.VITE_DORM_URL),
             handler: "StaleWhileRevalidate",
             options: {
               cacheName: "din-api-cache",
