@@ -1,5 +1,5 @@
-import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+import { defineConfig } from "vite";
 import { VitePWA } from "vite-plugin-pwa";
 
 // https://vite.dev/config/
@@ -34,6 +34,7 @@ export default defineConfig({
         enabled: true, // Enable PWA support during development for testing
       },
       workbox: {
+        importScripts: ["swEnv.js"],
         runtimeCaching: [
           {
             urlPattern: ({ url }) => url.pathname.startsWith("/assets"),
@@ -45,10 +46,11 @@ export default defineConfig({
           },
           {
             urlPattern: ({ url }) =>
-              url.href.startsWith("https://docs.google.com/document/d/"),
+              url.href.startsWith(process.env.VITE_SELF_URL) ||
+              url.href.startsWith(process.env.VITE_DORM_URL),
             handler: "StaleWhileRevalidate",
             options: {
-              cacheName: "google-docs-cache",
+              cacheName: "din-api-cache",
               cacheableResponse: { statuses: [0, 200] },
               plugins: [
                 {
