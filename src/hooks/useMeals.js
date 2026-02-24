@@ -25,6 +25,11 @@ export function useMeals() {
     queryFn: () =>
       fetch(import.meta.env.VITE_DORM_URL).then((res) => res.json()),
     enabled: dormFlag,
+    select: (data) =>
+      data.map((meal) => ({
+        ...meal,
+        foods: meal.foods.filter((food) => food !== "2عدد"),
+      })),
   });
 
   const queryClient = useQueryClient();
