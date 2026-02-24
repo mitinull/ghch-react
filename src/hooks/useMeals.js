@@ -35,7 +35,7 @@ export function useMeals() {
         if (
           event.data &&
           event.data.type === "CACHE_UPDATED" &&
-          event.data.payload.cacheName === "google-docs-cache"
+          event.data.payload.cacheName === "din-api-cache"
         ) {
           const { url, data } = event.data.payload;
           if (url === import.meta.env.VITE_SELF_URL) {
