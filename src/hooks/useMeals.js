@@ -25,6 +25,11 @@ export function useMeals() {
     queryFn: () =>
       fetch(import.meta.env.VITE_DORM_URL).then((res) => res.json()),
     enabled: dormFlag,
+    select: (data) =>
+      data.map((meal) => ({
+        ...meal,
+        foods: meal.foods.filter((food) => food !== "2عدد"),
+      })),
   });
 
   const queryClient = useQueryClient();
@@ -35,7 +40,7 @@ export function useMeals() {
         if (
           event.data &&
           event.data.type === "CACHE_UPDATED" &&
-          event.data.payload.cacheName === "google-docs-cache"
+          event.data.payload.cacheName === "din-api-cache"
         ) {
           const { url, data } = event.data.payload;
           if (url === import.meta.env.VITE_SELF_URL) {
